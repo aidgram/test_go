@@ -6,3 +6,12 @@ service:
     - port: 80
       targetPort: 8080
       protocol: TCP
+
+istio:
+  ingress:
+    hosts:
+      - prefix: '/test/'
+        name: 'test-go-app'
+        rewrite: '/'
+        port: 8080
+        destination: {{ .Release.Name }}-vs
