@@ -14,4 +14,3 @@ istio:
         name: 'test-go-app'
         rewrite: '/'
         port: 8080
-        destination: {{ .Release.Name }}-vs
