@@ -13,4 +13,4 @@ istio:
       - prefix: '/test/'
         name: 'test-go-app'
         rewrite: '/'
-        port: 8080
+        port: 80
