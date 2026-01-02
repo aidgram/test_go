@@ -2,8 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -48,6 +51,16 @@ func testHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/test", testHandler)
+
+	fmt.Println(os.Getenv("DB_USERNAME"))
+	fmt.Println(os.Getenv("DB_PASSWORD"))
+	fmt.Println("=== Все переменные окружения ===")
+	for _, env := range os.Environ() {
+		parts := strings.SplitN(env, "=", 2)
+		key := parts[0]
+		value := parts[1]
+		fmt.Printf("%s = %s\n", key, value)
+	}
 
 	loggedMux := LoggingMiddleware(mux)
 
